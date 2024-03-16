@@ -1,0 +1,2 @@
+/usr/bin/ar qc libdata_base_manager.a  CMakeFiles/data_base_manager.dir/monitor_info_manager.cpp.o
+/usr/bin/ranlib libdata_base_manager.a
