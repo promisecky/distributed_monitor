@@ -33,7 +33,7 @@
 
 ### 1. swarm集群创建
 
-1. **初始化swarm：**将当前主机设置为swarm管理节点
+1. **初始化swarm**： 将当前主机设置为swarm管理节点
 
 ```sh
 docker swarm init
