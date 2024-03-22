@@ -5,6 +5,8 @@ e9d4bc8bfcecb2f6c095e1e5a2c64fe9 proto/cpu_load.pb.h
 f2582d59f86c13c8037474ee618e14bc proto/cpu_softirq.pb.h
 77b71eb11149e07abe8328c687f40a09 proto/cpu_stat.grpc.pb.h
 c19f65727c4227e22f7822a5dffd1c60 proto/cpu_stat.pb.h
+f953857947279b1523331b2e9cc45ad7 proto/host_info.grpc.pb.h
+04676dc7fba223d16217a8c24b6589ab proto/host_info.pb.h
 a5dd7082ec94ebecf61a3d1c20b7805d proto/mem_info.grpc.pb.h
 f15bde6ac749b3d8828085b5e5cae42a proto/mem_info.pb.h
 32e32874f5db3a49dafcd98e24de596c proto/monitor_info.grpc.pb.h

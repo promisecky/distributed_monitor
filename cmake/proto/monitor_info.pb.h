@@ -52,7 +52,7 @@ struct TableStruct_monitor_5finfo_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[1]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[3]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -61,12 +61,20 @@ struct TableStruct_monitor_5finfo_2eproto {
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_monitor_5finfo_2eproto;
 namespace monitor {
 namespace proto {
+class HostID;
+class HostIDDefaultTypeInternal;
+extern HostIDDefaultTypeInternal _HostID_default_instance_;
+class HostInfo;
+class HostInfoDefaultTypeInternal;
+extern HostInfoDefaultTypeInternal _HostInfo_default_instance_;
 class MonitorInfo;
 class MonitorInfoDefaultTypeInternal;
 extern MonitorInfoDefaultTypeInternal _MonitorInfo_default_instance_;
 }  // namespace proto
 }  // namespace monitor
 PROTOBUF_NAMESPACE_OPEN
+template<> ::monitor::proto::HostID* Arena::CreateMaybeMessage<::monitor::proto::HostID>(Arena*);
+template<> ::monitor::proto::HostInfo* Arena::CreateMaybeMessage<::monitor::proto::HostInfo>(Arena*);
 template<> ::monitor::proto::MonitorInfo* Arena::CreateMaybeMessage<::monitor::proto::MonitorInfo>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace monitor {
@@ -192,6 +200,7 @@ class MonitorInfo PROTOBUF_FINAL :
     kNameFieldNumber = 1,
     kCpuLoadFieldNumber = 5,
     kMemInfoFieldNumber = 7,
+    kHostIdFieldNumber = 9,
   };
   // repeated .monitor.proto.SoftIrq soft_irq = 4;
   int soft_irq_size() const;
@@ -299,6 +308,15 @@ class MonitorInfo PROTOBUF_FINAL :
       ::monitor::proto::MemInfo* mem_info);
   ::monitor::proto::MemInfo* unsafe_arena_release_mem_info();
 
+  // int64 host_id = 9;
+  void clear_host_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 host_id() const;
+  void set_host_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_host_id() const;
+  void _internal_set_host_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:monitor.proto.MonitorInfo)
  private:
   class _Internal;
@@ -312,6 +330,304 @@ class MonitorInfo PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
   ::monitor::proto::CpuLoad* cpu_load_;
   ::monitor::proto::MemInfo* mem_info_;
+  ::PROTOBUF_NAMESPACE_ID::int64 host_id_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_monitor_5finfo_2eproto;
+};
+// -------------------------------------------------------------------
+
+class HostInfo PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:monitor.proto.HostInfo) */ {
+ public:
+  inline HostInfo() : HostInfo(nullptr) {}
+  virtual ~HostInfo();
+
+  HostInfo(const HostInfo& from);
+  HostInfo(HostInfo&& from) noexcept
+    : HostInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline HostInfo& operator=(const HostInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline HostInfo& operator=(HostInfo&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const HostInfo& default_instance();
+
+  static inline const HostInfo* internal_default_instance() {
+    return reinterpret_cast<const HostInfo*>(
+               &_HostInfo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  friend void swap(HostInfo& a, HostInfo& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(HostInfo* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(HostInfo* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline HostInfo* New() const final {
+    return CreateMaybeMessage<HostInfo>(nullptr);
+  }
+
+  HostInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<HostInfo>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const HostInfo& from);
+  void MergeFrom(const HostInfo& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(HostInfo* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "monitor.proto.HostInfo";
+  }
+  protected:
+  explicit HostInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_monitor_5finfo_2eproto);
+    return ::descriptor_table_monitor_5finfo_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kIpFieldNumber = 1,
+    kMacFieldNumber = 2,
+  };
+  // string ip = 1;
+  void clear_ip();
+  const std::string& ip() const;
+  void set_ip(const std::string& value);
+  void set_ip(std::string&& value);
+  void set_ip(const char* value);
+  void set_ip(const char* value, size_t size);
+  std::string* mutable_ip();
+  std::string* release_ip();
+  void set_allocated_ip(std::string* ip);
+  private:
+  const std::string& _internal_ip() const;
+  void _internal_set_ip(const std::string& value);
+  std::string* _internal_mutable_ip();
+  public:
+
+  // string mac = 2;
+  void clear_mac();
+  const std::string& mac() const;
+  void set_mac(const std::string& value);
+  void set_mac(std::string&& value);
+  void set_mac(const char* value);
+  void set_mac(const char* value, size_t size);
+  std::string* mutable_mac();
+  std::string* release_mac();
+  void set_allocated_mac(std::string* mac);
+  private:
+  const std::string& _internal_mac() const;
+  void _internal_set_mac(const std::string& value);
+  std::string* _internal_mutable_mac();
+  public:
+
+  // @@protoc_insertion_point(class_scope:monitor.proto.HostInfo)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ip_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr mac_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_monitor_5finfo_2eproto;
+};
+// -------------------------------------------------------------------
+
+class HostID PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:monitor.proto.HostID) */ {
+ public:
+  inline HostID() : HostID(nullptr) {}
+  virtual ~HostID();
+
+  HostID(const HostID& from);
+  HostID(HostID&& from) noexcept
+    : HostID() {
+    *this = ::std::move(from);
+  }
+
+  inline HostID& operator=(const HostID& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline HostID& operator=(HostID&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const HostID& default_instance();
+
+  static inline const HostID* internal_default_instance() {
+    return reinterpret_cast<const HostID*>(
+               &_HostID_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(HostID& a, HostID& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(HostID* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(HostID* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline HostID* New() const final {
+    return CreateMaybeMessage<HostID>(nullptr);
+  }
+
+  HostID* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<HostID>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const HostID& from);
+  void MergeFrom(const HostID& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(HostID* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "monitor.proto.HostID";
+  }
+  protected:
+  explicit HostID(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_monitor_5finfo_2eproto);
+    return ::descriptor_table_monitor_5finfo_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kHostIdFieldNumber = 1,
+  };
+  // int64 host_id = 1;
+  void clear_host_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 host_id() const;
+  void set_host_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_host_id() const;
+  void _internal_set_host_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:monitor.proto.HostID)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::int64 host_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_monitor_5finfo_2eproto;
 };
@@ -649,9 +965,183 @@ MonitorInfo::net_info() const {
   return net_info_;
 }
 
+// int64 host_id = 9;
+inline void MonitorInfo::clear_host_id() {
+  host_id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MonitorInfo::_internal_host_id() const {
+  return host_id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MonitorInfo::host_id() const {
+  // @@protoc_insertion_point(field_get:monitor.proto.MonitorInfo.host_id)
+  return _internal_host_id();
+}
+inline void MonitorInfo::_internal_set_host_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  host_id_ = value;
+}
+inline void MonitorInfo::set_host_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_host_id(value);
+  // @@protoc_insertion_point(field_set:monitor.proto.MonitorInfo.host_id)
+}
+
+// -------------------------------------------------------------------
+
+// HostInfo
+
+// string ip = 1;
+inline void HostInfo::clear_ip() {
+  ip_.ClearToEmpty();
+}
+inline const std::string& HostInfo::ip() const {
+  // @@protoc_insertion_point(field_get:monitor.proto.HostInfo.ip)
+  return _internal_ip();
+}
+inline void HostInfo::set_ip(const std::string& value) {
+  _internal_set_ip(value);
+  // @@protoc_insertion_point(field_set:monitor.proto.HostInfo.ip)
+}
+inline std::string* HostInfo::mutable_ip() {
+  // @@protoc_insertion_point(field_mutable:monitor.proto.HostInfo.ip)
+  return _internal_mutable_ip();
+}
+inline const std::string& HostInfo::_internal_ip() const {
+  return ip_.Get();
+}
+inline void HostInfo::_internal_set_ip(const std::string& value) {
+  
+  ip_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void HostInfo::set_ip(std::string&& value) {
+  
+  ip_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:monitor.proto.HostInfo.ip)
+}
+inline void HostInfo::set_ip(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  ip_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:monitor.proto.HostInfo.ip)
+}
+inline void HostInfo::set_ip(const char* value,
+    size_t size) {
+  
+  ip_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:monitor.proto.HostInfo.ip)
+}
+inline std::string* HostInfo::_internal_mutable_ip() {
+  
+  return ip_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* HostInfo::release_ip() {
+  // @@protoc_insertion_point(field_release:monitor.proto.HostInfo.ip)
+  return ip_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void HostInfo::set_allocated_ip(std::string* ip) {
+  if (ip != nullptr) {
+    
+  } else {
+    
+  }
+  ip_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ip,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:monitor.proto.HostInfo.ip)
+}
+
+// string mac = 2;
+inline void HostInfo::clear_mac() {
+  mac_.ClearToEmpty();
+}
+inline const std::string& HostInfo::mac() const {
+  // @@protoc_insertion_point(field_get:monitor.proto.HostInfo.mac)
+  return _internal_mac();
+}
+inline void HostInfo::set_mac(const std::string& value) {
+  _internal_set_mac(value);
+  // @@protoc_insertion_point(field_set:monitor.proto.HostInfo.mac)
+}
+inline std::string* HostInfo::mutable_mac() {
+  // @@protoc_insertion_point(field_mutable:monitor.proto.HostInfo.mac)
+  return _internal_mutable_mac();
+}
+inline const std::string& HostInfo::_internal_mac() const {
+  return mac_.Get();
+}
+inline void HostInfo::_internal_set_mac(const std::string& value) {
+  
+  mac_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void HostInfo::set_mac(std::string&& value) {
+  
+  mac_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:monitor.proto.HostInfo.mac)
+}
+inline void HostInfo::set_mac(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  mac_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:monitor.proto.HostInfo.mac)
+}
+inline void HostInfo::set_mac(const char* value,
+    size_t size) {
+  
+  mac_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:monitor.proto.HostInfo.mac)
+}
+inline std::string* HostInfo::_internal_mutable_mac() {
+  
+  return mac_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* HostInfo::release_mac() {
+  // @@protoc_insertion_point(field_release:monitor.proto.HostInfo.mac)
+  return mac_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void HostInfo::set_allocated_mac(std::string* mac) {
+  if (mac != nullptr) {
+    
+  } else {
+    
+  }
+  mac_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), mac,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:monitor.proto.HostInfo.mac)
+}
+
+// -------------------------------------------------------------------
+
+// HostID
+
+// int64 host_id = 1;
+inline void HostID::clear_host_id() {
+  host_id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 HostID::_internal_host_id() const {
+  return host_id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 HostID::host_id() const {
+  // @@protoc_insertion_point(field_get:monitor.proto.HostID.host_id)
+  return _internal_host_id();
+}
+inline void HostID::_internal_set_host_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  host_id_ = value;
+}
+inline void HostID::set_host_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_host_id(value);
+  // @@protoc_insertion_point(field_set:monitor.proto.HostID.host_id)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 

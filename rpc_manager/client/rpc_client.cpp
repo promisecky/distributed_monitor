@@ -2,7 +2,7 @@
  * @Author: ChengKeyi
  * @Date: 2024-03-11 22:45:21
  * @LastEditors: ChengKeyi
- * @LastEditTime: 2024-03-11 22:56:29
+ * @LastEditTime: 2024-03-19 11:58:31
  * @FilePath: /Desktop/monitor/rpc_manager/client/rpc_client.cpp
  * @Description:
  */
@@ -40,6 +40,20 @@ namespace monitor
         ::google::protobuf::Empty
             requires;
         ::grpc::Status status = stub_ptr->GetMonitorInfo(&context, requires, monitorInfo);
+        if (status.ok())
+        {
+        }
+        else
+        {
+            std::cout << status.error_details() << std::endl;
+            std::cout << "falied to connect !!!" << std::endl;
+        }
+    }
+
+    void RpcClient::GetHostID(const monitor::proto::HostInfo &hostInfo, monitor::proto::HostID *host_id)
+    {
+        ::grpc::ClientContext context;
+        ::grpc::Status status = stub_ptr->GetHostID(&context, hostInfo, host_id);
         if (status.ok())
         {
         }

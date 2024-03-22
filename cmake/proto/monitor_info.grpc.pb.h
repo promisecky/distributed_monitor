@@ -44,6 +44,13 @@ class GrpcManager final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> PrepareAsyncSetMonitorInfo(::grpc::ClientContext* context, const ::monitor::proto::MonitorInfo& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(PrepareAsyncSetMonitorInfoRaw(context, request, cq));
     }
+    virtual ::grpc::Status GetHostID(::grpc::ClientContext* context, const ::monitor::proto::HostInfo& request, ::monitor::proto::HostID* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::monitor::proto::HostID>> AsyncGetHostID(::grpc::ClientContext* context, const ::monitor::proto::HostInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::monitor::proto::HostID>>(AsyncGetHostIDRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::monitor::proto::HostID>> PrepareAsyncGetHostID(::grpc::ClientContext* context, const ::monitor::proto::HostInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::monitor::proto::HostID>>(PrepareAsyncGetHostIDRaw(context, request, cq));
+    }
     virtual ::grpc::Status GetMonitorInfo(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::monitor::proto::MonitorInfo* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::monitor::proto::MonitorInfo>> AsyncGetMonitorInfo(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::monitor::proto::MonitorInfo>>(AsyncGetMonitorInfoRaw(context, request, cq));
@@ -65,6 +72,18 @@ class GrpcManager final {
       virtual void SetMonitorInfo(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::google::protobuf::Empty* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       #else
       virtual void SetMonitorInfo(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::google::protobuf::Empty* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+      virtual void GetHostID(::grpc::ClientContext* context, const ::monitor::proto::HostInfo* request, ::monitor::proto::HostID* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void GetHostID(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::monitor::proto::HostID* response, std::function<void(::grpc::Status)>) = 0;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void GetHostID(::grpc::ClientContext* context, const ::monitor::proto::HostInfo* request, ::monitor::proto::HostID* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
+      virtual void GetHostID(::grpc::ClientContext* context, const ::monitor::proto::HostInfo* request, ::monitor::proto::HostID* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void GetHostID(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::monitor::proto::HostID* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
+      virtual void GetHostID(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::monitor::proto::HostID* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
       #endif
       virtual void GetMonitorInfo(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::monitor::proto::MonitorInfo* response, std::function<void(::grpc::Status)>) = 0;
       virtual void GetMonitorInfo(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::monitor::proto::MonitorInfo* response, std::function<void(::grpc::Status)>) = 0;
@@ -89,6 +108,8 @@ class GrpcManager final {
   private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncSetMonitorInfoRaw(::grpc::ClientContext* context, const ::monitor::proto::MonitorInfo& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncSetMonitorInfoRaw(::grpc::ClientContext* context, const ::monitor::proto::MonitorInfo& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::monitor::proto::HostID>* AsyncGetHostIDRaw(::grpc::ClientContext* context, const ::monitor::proto::HostInfo& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::monitor::proto::HostID>* PrepareAsyncGetHostIDRaw(::grpc::ClientContext* context, const ::monitor::proto::HostInfo& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::monitor::proto::MonitorInfo>* AsyncGetMonitorInfoRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::monitor::proto::MonitorInfo>* PrepareAsyncGetMonitorInfoRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
   };
@@ -101,6 +122,13 @@ class GrpcManager final {
     }
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> PrepareAsyncSetMonitorInfo(::grpc::ClientContext* context, const ::monitor::proto::MonitorInfo& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(PrepareAsyncSetMonitorInfoRaw(context, request, cq));
+    }
+    ::grpc::Status GetHostID(::grpc::ClientContext* context, const ::monitor::proto::HostInfo& request, ::monitor::proto::HostID* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::monitor::proto::HostID>> AsyncGetHostID(::grpc::ClientContext* context, const ::monitor::proto::HostInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::monitor::proto::HostID>>(AsyncGetHostIDRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::monitor::proto::HostID>> PrepareAsyncGetHostID(::grpc::ClientContext* context, const ::monitor::proto::HostInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::monitor::proto::HostID>>(PrepareAsyncGetHostIDRaw(context, request, cq));
     }
     ::grpc::Status GetMonitorInfo(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::monitor::proto::MonitorInfo* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::monitor::proto::MonitorInfo>> AsyncGetMonitorInfo(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
@@ -123,6 +151,18 @@ class GrpcManager final {
       void SetMonitorInfo(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::google::protobuf::Empty* response, ::grpc::ClientUnaryReactor* reactor) override;
       #else
       void SetMonitorInfo(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::google::protobuf::Empty* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+      void GetHostID(::grpc::ClientContext* context, const ::monitor::proto::HostInfo* request, ::monitor::proto::HostID* response, std::function<void(::grpc::Status)>) override;
+      void GetHostID(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::monitor::proto::HostID* response, std::function<void(::grpc::Status)>) override;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void GetHostID(::grpc::ClientContext* context, const ::monitor::proto::HostInfo* request, ::monitor::proto::HostID* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
+      void GetHostID(::grpc::ClientContext* context, const ::monitor::proto::HostInfo* request, ::monitor::proto::HostID* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void GetHostID(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::monitor::proto::HostID* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
+      void GetHostID(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::monitor::proto::HostID* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
       #endif
       void GetMonitorInfo(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::monitor::proto::MonitorInfo* response, std::function<void(::grpc::Status)>) override;
       void GetMonitorInfo(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::monitor::proto::MonitorInfo* response, std::function<void(::grpc::Status)>) override;
@@ -149,9 +189,12 @@ class GrpcManager final {
     class experimental_async async_stub_{this};
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncSetMonitorInfoRaw(::grpc::ClientContext* context, const ::monitor::proto::MonitorInfo& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncSetMonitorInfoRaw(::grpc::ClientContext* context, const ::monitor::proto::MonitorInfo& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::monitor::proto::HostID>* AsyncGetHostIDRaw(::grpc::ClientContext* context, const ::monitor::proto::HostInfo& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::monitor::proto::HostID>* PrepareAsyncGetHostIDRaw(::grpc::ClientContext* context, const ::monitor::proto::HostInfo& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::monitor::proto::MonitorInfo>* AsyncGetMonitorInfoRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::monitor::proto::MonitorInfo>* PrepareAsyncGetMonitorInfoRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_SetMonitorInfo_;
+    const ::grpc::internal::RpcMethod rpcmethod_GetHostID_;
     const ::grpc::internal::RpcMethod rpcmethod_GetMonitorInfo_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
@@ -161,6 +204,7 @@ class GrpcManager final {
     Service();
     virtual ~Service();
     virtual ::grpc::Status SetMonitorInfo(::grpc::ServerContext* context, const ::monitor::proto::MonitorInfo* request, ::google::protobuf::Empty* response);
+    virtual ::grpc::Status GetHostID(::grpc::ServerContext* context, const ::monitor::proto::HostInfo* request, ::monitor::proto::HostID* response);
     virtual ::grpc::Status GetMonitorInfo(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::monitor::proto::MonitorInfo* response);
   };
   template <class BaseClass>
@@ -184,12 +228,32 @@ class GrpcManager final {
     }
   };
   template <class BaseClass>
+  class WithAsyncMethod_GetHostID : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_GetHostID() {
+      ::grpc::Service::MarkMethodAsync(1);
+    }
+    ~WithAsyncMethod_GetHostID() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetHostID(::grpc::ServerContext* /*context*/, const ::monitor::proto::HostInfo* /*request*/, ::monitor::proto::HostID* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestGetHostID(::grpc::ServerContext* context, ::monitor::proto::HostInfo* request, ::grpc::ServerAsyncResponseWriter< ::monitor::proto::HostID>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithAsyncMethod_GetMonitorInfo : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_GetMonitorInfo() {
-      ::grpc::Service::MarkMethodAsync(1);
+      ::grpc::Service::MarkMethodAsync(2);
     }
     ~WithAsyncMethod_GetMonitorInfo() override {
       BaseClassMustBeDerivedFromService(this);
@@ -200,10 +264,10 @@ class GrpcManager final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestGetMonitorInfo(::grpc::ServerContext* context, ::google::protobuf::Empty* request, ::grpc::ServerAsyncResponseWriter< ::monitor::proto::MonitorInfo>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_SetMonitorInfo<WithAsyncMethod_GetMonitorInfo<Service > > AsyncService;
+  typedef WithAsyncMethod_SetMonitorInfo<WithAsyncMethod_GetHostID<WithAsyncMethod_GetMonitorInfo<Service > > > AsyncService;
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_SetMonitorInfo : public BaseClass {
    private:
@@ -252,6 +316,53 @@ class GrpcManager final {
       { return nullptr; }
   };
   template <class BaseClass>
+  class ExperimentalWithCallbackMethod_GetHostID : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithCallbackMethod_GetHostID() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodCallback(1,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::monitor::proto::HostInfo, ::monitor::proto::HostID>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::monitor::proto::HostInfo* request, ::monitor::proto::HostID* response) { return this->GetHostID(context, request, response); }));}
+    void SetMessageAllocatorFor_GetHostID(
+        ::grpc::experimental::MessageAllocator< ::monitor::proto::HostInfo, ::monitor::proto::HostID>* allocator) {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
+    #else
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(1);
+    #endif
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::monitor::proto::HostInfo, ::monitor::proto::HostID>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~ExperimentalWithCallbackMethod_GetHostID() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetHostID(::grpc::ServerContext* /*context*/, const ::monitor::proto::HostInfo* /*request*/, ::monitor::proto::HostID* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* GetHostID(
+      ::grpc::CallbackServerContext* /*context*/, const ::monitor::proto::HostInfo* /*request*/, ::monitor::proto::HostID* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* GetHostID(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::monitor::proto::HostInfo* /*request*/, ::monitor::proto::HostID* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
   class ExperimentalWithCallbackMethod_GetMonitorInfo : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
@@ -262,7 +373,7 @@ class GrpcManager final {
     #else
       ::grpc::Service::experimental().
     #endif
-        MarkMethodCallback(1,
+        MarkMethodCallback(2,
           new ::grpc_impl::internal::CallbackUnaryHandler< ::google::protobuf::Empty, ::monitor::proto::MonitorInfo>(
             [this](
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -274,9 +385,9 @@ class GrpcManager final {
     void SetMessageAllocatorFor_GetMonitorInfo(
         ::grpc::experimental::MessageAllocator< ::google::protobuf::Empty, ::monitor::proto::MonitorInfo>* allocator) {
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
     #else
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(1);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(2);
     #endif
       static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::google::protobuf::Empty, ::monitor::proto::MonitorInfo>*>(handler)
               ->SetMessageAllocator(allocator);
@@ -299,10 +410,10 @@ class GrpcManager final {
       { return nullptr; }
   };
   #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-  typedef ExperimentalWithCallbackMethod_SetMonitorInfo<ExperimentalWithCallbackMethod_GetMonitorInfo<Service > > CallbackService;
+  typedef ExperimentalWithCallbackMethod_SetMonitorInfo<ExperimentalWithCallbackMethod_GetHostID<ExperimentalWithCallbackMethod_GetMonitorInfo<Service > > > CallbackService;
   #endif
 
-  typedef ExperimentalWithCallbackMethod_SetMonitorInfo<ExperimentalWithCallbackMethod_GetMonitorInfo<Service > > ExperimentalCallbackService;
+  typedef ExperimentalWithCallbackMethod_SetMonitorInfo<ExperimentalWithCallbackMethod_GetHostID<ExperimentalWithCallbackMethod_GetMonitorInfo<Service > > > ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_SetMonitorInfo : public BaseClass {
    private:
@@ -321,12 +432,29 @@ class GrpcManager final {
     }
   };
   template <class BaseClass>
+  class WithGenericMethod_GetHostID : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_GetHostID() {
+      ::grpc::Service::MarkMethodGeneric(1);
+    }
+    ~WithGenericMethod_GetHostID() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetHostID(::grpc::ServerContext* /*context*/, const ::monitor::proto::HostInfo* /*request*/, ::monitor::proto::HostID* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
   class WithGenericMethod_GetMonitorInfo : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_GetMonitorInfo() {
-      ::grpc::Service::MarkMethodGeneric(1);
+      ::grpc::Service::MarkMethodGeneric(2);
     }
     ~WithGenericMethod_GetMonitorInfo() override {
       BaseClassMustBeDerivedFromService(this);
@@ -358,12 +486,32 @@ class GrpcManager final {
     }
   };
   template <class BaseClass>
+  class WithRawMethod_GetHostID : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_GetHostID() {
+      ::grpc::Service::MarkMethodRaw(1);
+    }
+    ~WithRawMethod_GetHostID() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetHostID(::grpc::ServerContext* /*context*/, const ::monitor::proto::HostInfo* /*request*/, ::monitor::proto::HostID* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestGetHostID(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithRawMethod_GetMonitorInfo : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_GetMonitorInfo() {
-      ::grpc::Service::MarkMethodRaw(1);
+      ::grpc::Service::MarkMethodRaw(2);
     }
     ~WithRawMethod_GetMonitorInfo() override {
       BaseClassMustBeDerivedFromService(this);
@@ -374,7 +522,7 @@ class GrpcManager final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestGetMonitorInfo(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -416,6 +564,44 @@ class GrpcManager final {
       { return nullptr; }
   };
   template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_GetHostID : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithRawCallbackMethod_GetHostID() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodRawCallback(1,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->GetHostID(context, request, response); }));
+    }
+    ~ExperimentalWithRawCallbackMethod_GetHostID() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetHostID(::grpc::ServerContext* /*context*/, const ::monitor::proto::HostInfo* /*request*/, ::monitor::proto::HostID* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* GetHostID(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* GetHostID(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_GetMonitorInfo : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
@@ -426,7 +612,7 @@ class GrpcManager final {
     #else
       ::grpc::Service::experimental().
     #endif
-        MarkMethodRawCallback(1,
+        MarkMethodRawCallback(2,
           new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -481,12 +667,39 @@ class GrpcManager final {
     virtual ::grpc::Status StreamedSetMonitorInfo(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::monitor::proto::MonitorInfo,::google::protobuf::Empty>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
+  class WithStreamedUnaryMethod_GetHostID : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_GetHostID() {
+      ::grpc::Service::MarkMethodStreamed(1,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::monitor::proto::HostInfo, ::monitor::proto::HostID>(
+            [this](::grpc_impl::ServerContext* context,
+                   ::grpc_impl::ServerUnaryStreamer<
+                     ::monitor::proto::HostInfo, ::monitor::proto::HostID>* streamer) {
+                       return this->StreamedGetHostID(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_GetHostID() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status GetHostID(::grpc::ServerContext* /*context*/, const ::monitor::proto::HostInfo* /*request*/, ::monitor::proto::HostID* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedGetHostID(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::monitor::proto::HostInfo,::monitor::proto::HostID>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_GetMonitorInfo : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_GetMonitorInfo() {
-      ::grpc::Service::MarkMethodStreamed(1,
+      ::grpc::Service::MarkMethodStreamed(2,
         new ::grpc::internal::StreamedUnaryHandler<
           ::google::protobuf::Empty, ::monitor::proto::MonitorInfo>(
             [this](::grpc_impl::ServerContext* context,
@@ -507,9 +720,9 @@ class GrpcManager final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status StreamedGetMonitorInfo(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::google::protobuf::Empty,::monitor::proto::MonitorInfo>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_SetMonitorInfo<WithStreamedUnaryMethod_GetMonitorInfo<Service > > StreamedUnaryService;
+  typedef WithStreamedUnaryMethod_SetMonitorInfo<WithStreamedUnaryMethod_GetHostID<WithStreamedUnaryMethod_GetMonitorInfo<Service > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_SetMonitorInfo<WithStreamedUnaryMethod_GetMonitorInfo<Service > > StreamedService;
+  typedef WithStreamedUnaryMethod_SetMonitorInfo<WithStreamedUnaryMethod_GetHostID<WithStreamedUnaryMethod_GetMonitorInfo<Service > > > StreamedService;
 };
 
 }  // namespace proto

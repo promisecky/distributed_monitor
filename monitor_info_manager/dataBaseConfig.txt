@@ -1,4 +1,4 @@
 USER=root
 PW=123456
-IP=172.18.0.2
+IP=mysql
 dataBase=monitor_info

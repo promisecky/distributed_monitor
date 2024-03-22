@@ -2,7 +2,7 @@
  * @Author: ChengKeyi
  * @Date: 2024-03-11 22:31:02
  * @LastEditors: ChengKeyi
- * @LastEditTime: 2024-03-11 22:45:09
+ * @LastEditTime: 2024-03-19 11:58:15
  * @FilePath: /Desktop/monitor/rpc_manager/client/rpc_client.h
  * @Description:
  */
@@ -24,6 +24,7 @@ namespace monitor
         ~RpcClient();
         void SetMonitorInfo(const monitor::proto::MonitorInfo &monitor_info);
         void GetMonitorInfo(monitor::proto::MonitorInfo *monitor_info);
+        void GetHostID(const monitor::proto::HostInfo &host_info, monitor::proto::HostID *host_id);
 
     private:
         std::unique_ptr<monitor::proto::GrpcManager::Stub> stub_ptr;

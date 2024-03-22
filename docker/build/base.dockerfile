@@ -18,10 +18,6 @@ RUN apt-get update  && apt-get upgrade -y  && \
     git \
     openssh-server \
     build-essential \
-    qtbase5-dev \
-    qtchooser \
-    qt5-qmake \
-    qtbase5-dev-tools \
     libboost-all-dev \
     net-tools \
     vim \
@@ -37,14 +33,7 @@ RUN apt-get install -y  \
     libxkbcommon-x11-0
 
 # 安装MySQL客户端库和开发库
-RUN apt-get update && \
-    apt-get install -y libmysqlclient-dev
-
-RUN apt-get install -y python-dev \
-    python3-dev \
-    python-pip \
-    python-all-dev 
-
+RUN apt-get install -y libmysqlclient-dev
 
 COPY install/protobuf /tmp/install/protobuf
 RUN /tmp/install/protobuf/install_protobuf.sh

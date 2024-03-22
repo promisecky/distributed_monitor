@@ -3,14 +3,12 @@
  # @Author: ChengKeyi
  # @Date: 2024-03-10 23:36:50
  # @LastEditors: ChengKeyi
- # @LastEditTime: 2024-03-21 23:11:39
- # @FilePath: /Desktop/monitor/docker/scripts/docker_run.sh
+ # @LastEditTime: 2024-03-22 10:42:52
+ # @FilePath: /Desktop/monitor/docker/scripts/docker_client_run.sh
  # @Description: 
 ### 
 
 MONITOR_HOME_DIR="$(cd "$(dirname ${BASH_SOURCE[0]})/../.." && pwd)"
-
-
 
 local_host="$(hostname)"
 user="${USER}"
@@ -28,9 +26,9 @@ docker rm -v -f learn_monitor > /dev/null
 echo "start docker"
 # docker run -it -d \
 docker run -it -d \
---name learn_monitor \
+--name client_monitor \
 -e DISPLAY=$display \
--p 50051:50051 \
+-p 50001:50001 \
 --privileged=true \
 -e DOCKER_USER="${user}" \
 -e USER="${user}" \

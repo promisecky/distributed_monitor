@@ -24,6 +24,7 @@ namespace proto {
 
 static const char* GrpcManager_method_names[] = {
   "/monitor.proto.GrpcManager/SetMonitorInfo",
+  "/monitor.proto.GrpcManager/GetHostID",
   "/monitor.proto.GrpcManager/GetMonitorInfo",
 };
 
@@ -35,7 +36,8 @@ std::unique_ptr< GrpcManager::Stub> GrpcManager::NewStub(const std::shared_ptr< 
 
 GrpcManager::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
   : channel_(channel), rpcmethod_SetMonitorInfo_(GrpcManager_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_GetMonitorInfo_(GrpcManager_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_GetHostID_(GrpcManager_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_GetMonitorInfo_(GrpcManager_method_names[2], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status GrpcManager::Stub::SetMonitorInfo(::grpc::ClientContext* context, const ::monitor::proto::MonitorInfo& request, ::google::protobuf::Empty* response) {
@@ -64,6 +66,34 @@ void GrpcManager::Stub::experimental_async::SetMonitorInfo(::grpc::ClientContext
 
 ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* GrpcManager::Stub::PrepareAsyncSetMonitorInfoRaw(::grpc::ClientContext* context, const ::monitor::proto::MonitorInfo& request, ::grpc::CompletionQueue* cq) {
   return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_SetMonitorInfo_, context, request, false);
+}
+
+::grpc::Status GrpcManager::Stub::GetHostID(::grpc::ClientContext* context, const ::monitor::proto::HostInfo& request, ::monitor::proto::HostID* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_GetHostID_, context, request, response);
+}
+
+void GrpcManager::Stub::experimental_async::GetHostID(::grpc::ClientContext* context, const ::monitor::proto::HostInfo* request, ::monitor::proto::HostID* response, std::function<void(::grpc::Status)> f) {
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetHostID_, context, request, response, std::move(f));
+}
+
+void GrpcManager::Stub::experimental_async::GetHostID(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::monitor::proto::HostID* response, std::function<void(::grpc::Status)> f) {
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetHostID_, context, request, response, std::move(f));
+}
+
+void GrpcManager::Stub::experimental_async::GetHostID(::grpc::ClientContext* context, const ::monitor::proto::HostInfo* request, ::monitor::proto::HostID* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetHostID_, context, request, response, reactor);
+}
+
+void GrpcManager::Stub::experimental_async::GetHostID(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::monitor::proto::HostID* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetHostID_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::monitor::proto::HostID>* GrpcManager::Stub::AsyncGetHostIDRaw(::grpc::ClientContext* context, const ::monitor::proto::HostInfo& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::monitor::proto::HostID>::Create(channel_.get(), cq, rpcmethod_GetHostID_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::monitor::proto::HostID>* GrpcManager::Stub::PrepareAsyncGetHostIDRaw(::grpc::ClientContext* context, const ::monitor::proto::HostInfo& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::monitor::proto::HostID>::Create(channel_.get(), cq, rpcmethod_GetHostID_, context, request, false);
 }
 
 ::grpc::Status GrpcManager::Stub::GetMonitorInfo(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::monitor::proto::MonitorInfo* response) {
@@ -108,6 +138,16 @@ GrpcManager::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       GrpcManager_method_names[1],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< GrpcManager::Service, ::monitor::proto::HostInfo, ::monitor::proto::HostID>(
+          [](GrpcManager::Service* service,
+             ::grpc_impl::ServerContext* ctx,
+             const ::monitor::proto::HostInfo* req,
+             ::monitor::proto::HostID* resp) {
+               return service->GetHostID(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      GrpcManager_method_names[2],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< GrpcManager::Service, ::google::protobuf::Empty, ::monitor::proto::MonitorInfo>(
           [](GrpcManager::Service* service,
              ::grpc_impl::ServerContext* ctx,
@@ -121,6 +161,13 @@ GrpcManager::Service::~Service() {
 }
 
 ::grpc::Status GrpcManager::Service::SetMonitorInfo(::grpc::ServerContext* context, const ::monitor::proto::MonitorInfo* request, ::google::protobuf::Empty* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status GrpcManager::Service::GetHostID(::grpc::ServerContext* context, const ::monitor::proto::HostInfo* request, ::monitor::proto::HostID* response) {
   (void) context;
   (void) request;
   (void) response;
